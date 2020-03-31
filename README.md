@@ -1,4 +1,4 @@
-# Mall2Test
+# 商城自动化项目
 Mall2Test
 
 Java+selenium+junit+jenkins+TAPD
