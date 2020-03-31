@@ -1,4 +1,4 @@
-# s1mple96
+# Mall2Test
 Mall2Test
 
 Java+selenium+junit+jenkins+TAPD
