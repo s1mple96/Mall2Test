@@ -97,7 +97,6 @@ public class Mall2testApplicationTest {
     private void backhome() throws InterruptedException {
         driver.navigate().back();
         System.out.println("返回页面");
-        Thread.sleep(1000);
     }
 
     /**
@@ -108,7 +107,6 @@ public class Mall2testApplicationTest {
     private void clickBtn(String xpaht, String msg) throws InterruptedException {
         driver.findElement(By.xpath(xpaht)).click();
         System.out.println(msg);
-        Thread.sleep(1000);
     }
 
     /**
@@ -118,7 +116,6 @@ public class Mall2testApplicationTest {
     private void slidedown(String xpath) throws InterruptedException {
         element = driver.findElement(By.xpath(xpath));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
-        Thread.sleep(1000);
         System.out.println("下滑");
     }
 
@@ -126,7 +123,7 @@ public class Mall2testApplicationTest {
      * 检测地址
      * @param xpath
      */
-    private void checkUrl(String xpath) {
+    private void checkUrl(String xpath) throws InterruptedException {
         WebDriverWait wait = (new WebDriverWait(driver, 20));
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
         System.out.println("check页面");
@@ -140,7 +137,7 @@ public class Mall2testApplicationTest {
     @Test
     @Tag("测试链接跳转")
     public void test_link() throws InterruptedException {
-        System.out.println("====================test_link开始====================");
+        System.out.println("↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓test_link开始↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓");
         beforeRun();
         //打开商场
         driver.get("http://xiehome.com/index.php/m.php");
@@ -148,10 +145,9 @@ public class Mall2testApplicationTest {
 
         driver.findElement(By.cssSelector("body > div.notice-agreement > div.index-dialog > a > img")).click();
         System.out.println("点击窗口海报进行跳转");
-        checkUrl("/html/body/div[3]/div[2]/div");
 
+        Thread.sleep(2000);
         backhome();
-        Thread.sleep(3000);
         checkUrl("//*[@id=\"index-ad-wrapper\"]/div[1]");
 
         driver.findElement(By.cssSelector("#index-ad-wrapper > div:nth-child(1)")).click();
@@ -170,32 +166,19 @@ public class Mall2testApplicationTest {
         backhome();
         checkUrl("//*[@id=\"index-ad-wrapper\"]/div[1]");
 
-        driver.findElement(By.cssSelector("#home_layout > div:nth-child(7) > div.home-hot-box-body > div.home-hot-box-body-right > a:nth-child(1) > div > img")).click();
-        System.out.println("点击热门头条");
-        checkUrl("/html/body/div/div[2]");
+        clickBtn("//*[@id=\"index-article-wrapper\"]/div[1]/div[1]/div","点击热门头条");
 
         backhome();
         checkUrl("//*[@id=\"index-ad-wrapper\"]/div[1]");
 
         slidedown("//*[@id=\"home_layout\"]/div[5]/div[1]/div[1]");
 
-        driver.findElement(By.cssSelector("#home_layout > div:nth-child(8) > div.home-warp-box-body > div:nth-child(1) > a > img")).click();
-        System.out.println("点击大师装修");
-        checkUrl("/html/body/div[5]/div/div[1]/span");
+        clickBtn("//*[@id=\"home_layout\"]/div[5]/div[2]/div[1]/a","点击苏宁易购");
 
         backhome();
         checkUrl("//*[@id=\"index-ad-wrapper\"]/div[1]");
 
         slidedown("//*[@id=\"home_layout\"]/div[6]/div[1]/div[1]");
-
-        driver.findElement(By.cssSelector("#home_layout > div:nth-child(9) > div.home-warp-box-body > div:nth-child(1) > a > img")).click();
-        System.out.println("点击乐家");
-        checkUrl("//*[@id=\"seller_layout\"]/div[6]/a[1]/div/div[2]/div[1]");
-
-        backhome();
-        checkUrl("//*[@id=\"index-ad-wrapper\"]/div[1]");
-
-        slidedown("//*[@id=\"home_layout\"]/div[6]/div[2]/div[9]");
 
         driver.findElement(By.cssSelector("#activity-swiper > div.home-activity-box.layui-this > div > a:nth-child(1) > div > div.home-main-box-item-content > div.home-main-box-item-price > span.buy")).click();
         System.out.println("点击立即秒杀");
@@ -204,7 +187,7 @@ public class Mall2testApplicationTest {
         backhome();
         checkUrl("//*[@id=\"index-ad-wrapper\"]/div[1]");
 
-        slidedown("//*[@id=\"home_layout\"]/div[6]/div[2]/div[9]");
+        slidedown("//*[@id=\"home_layout\"]/div[6]/div[1]/div[1]");
 
         driver.findElement(By.cssSelector("#home_layout > div:nth-child(12) > div.home-main-box-header > div:nth-child(2)")).click();
         System.out.println("点击团购更省");
@@ -240,16 +223,17 @@ public class Mall2testApplicationTest {
         backhome();
         checkUrl("//*[@id=\"index-ad-wrapper\"]/div[1]");
 
-//        driver.findElement(By.xpath("//*[@id=\"home_layout\"]/div[8]/a/img")).click();
-//        System.out.println("点击右下角悬浮图片");
-//        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[5]/div/div[1]/span")));
-//        System.out.println("/html/body/div/div[5]/div[2]/div[2]");
-//
-//        driver.navigate().back();
-//        System.out.println("返回页面");
-//        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"index-ad-wrapper\"]/div[1]")));
-//        System.out.println("断言页面");
-        System.out.println("====================test_link结束====================");
+        /*driver.findElement(By.xpath("//*[@id=\"home_layout\"]/div[8]/a/img")).click();
+        System.out.println("点击右下角悬浮图片");
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[5]/div/div[1]/span")));
+        System.out.println("/html/body/div/div[5]/div[2]/div[2]");
+
+        driver.navigate().back();
+        System.out.println("返回页面");
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@id=\"index-ad-wrapper\"]/div[1]")));
+        System.out.println("断言页面");*/
+        System.out.println("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑test_link结束↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
+        System.out.println("====================================================");
         driver.close();
     }
 
@@ -260,25 +244,22 @@ public class Mall2testApplicationTest {
     @Test
     @Tag("测试登陆功能")
     public void test_login() throws InterruptedException{
-        System.out.println("====================test_login开始====================");
+        System.out.println("↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓test_login开始↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓");
         beforeRun();
         //打开商场
         driver.get("http://www.xiehome.com/index.php/m.php/loginpage");
         System.out.println("访问登陆页面");
         checkUrl("//*[@id=\"form\"]/div[2]/div[3]/a/p");
-
         driver.findElement(By.id("phoneNum_login")).sendKeys("15818376789");
         System.out.println("输入正确账号");
         driver.findElement(By.id("login_password_num")).sendKeys("asd1234561");
         System.out.println("输入错误密码");
-
+        Thread.sleep(3000);
         driver.findElement(By.id("login_btn")).click();
         System.out.println("点击登陆");
         checkUrl("//*[@id=\"tips-shade\"]/div");
         System.out.println("验证:密码错误");
-
         Thread.sleep(3000);
-
         driver.findElement(By.id("phoneNum_login")).clear();
         System.out.println("清除登陆账号");
         driver.findElement(By.id("phoneNum_login")).sendKeys("15818376777");
@@ -287,27 +268,23 @@ public class Mall2testApplicationTest {
         System.out.println("清除登陆密码");
         driver.findElement(By.id("login_password_num")).sendKeys("asd123456");
         System.out.println("输入正确密码");
-
         driver.findElement(By.id("login_btn")).click();
         System.out.println("点击登陆");
         checkUrl("//*[@id=\"tips-shade\"]/div");
         System.out.println("验证:密码错误");
-
         Thread.sleep(3000);
         driver.findElement(By.id("phoneNum_login")).clear();
         System.out.println("清除登陆账号");
         driver.findElement(By.id("phoneNum_login")).sendKeys("15818376789");
         System.out.println("输入正确账号");
-
         Thread.sleep(3000);
         driver.findElement(By.id("login_btn")).click();
         System.out.println("点击登陆");
-
+        Thread.sleep(3000);
         checkUrl("/html/body/div[2]/div[2]/div/img");
-
         driver.findElement(By.xpath("/html/body/div[2]/div[2]/div/img")).click();
-
-        System.out.println("====================test_login结束====================");
+        System.out.println("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑test_login结束↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
+        System.out.println("=====================================================");
         driver.close();
     }
 
@@ -318,65 +295,45 @@ public class Mall2testApplicationTest {
     @Test
     @Tag("测试订单功能")
     public void test_order() throws InterruptedException{
-        System.out.println("====================test_order开始====================");
+        System.out.println("↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓test_order开始↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓");
         beforeRun();
-
         driver.get("http://www.xiehome.com/index.php/m.php/loginpage");
         System.out.println("打开登陆页面");
         driver.findElement(By.id("phoneNum_login")).sendKeys("15818376789");
         System.out.println("输入账号");
         driver.findElement(By.id("login_password_num")).sendKeys("asd123456");
         System.out.println("输入密码");
+        Thread.sleep(2000);
         driver.findElement(By.id("login_btn")).click();
         System.out.println("点击登陆");
         Thread.sleep(3000);
         System.out.println("等待3秒");
-
         clickBtn("/html/body/div[2]/div[2]/div/img","关闭广告弹出框");
-
         clickBtn("/html/body/div[5]/a[5]","点击我的");
-
         clickBtn("//*[@id=\"personal_layout\"]/div[3]/div[2]/a[1]","点击全部订单");
-
         clickBtn("//*[@id=\"myorder-box-top\"]/div[2]","点击待付款");
-
         clickBtn("//*[@id=\"myorder-box-top\"]/div[3]","点击待发货");
-
         clickBtn("//*[@id=\"myorder-box-top\"]/div[4]","点击待收货");
-
         clickBtn("//*[@id=\"myorder-box-top\"]/div[5]","点击已完成");
-
         clickBtn("//*[@id=\"myorder-box-top\"]/div[6]","点击退款/售后");
-
         clickBtn("//*[@id=\"myorder-box-top\"]/div[1]","点击全部订单");
-
         clickBtn("//*[@id=\"tg_container\"]/div[1]/div[1]","点击订单详情");
-
         slidedown("/html/body/div[5]/div/div[6]/p");
-
         clickBtn("//*[@id=\"header-right\"]","点击菜单");
-
         Thread.sleep(3000);
         System.out.println("等待3秒");
-
         clickBtn("//*[@id=\"alls-box\"]/div/div[2]/div[4]/a","点击我的");
-
         clickBtn("//*[@id=\"personal_layout\"]/div[3]/div[1]/div[2]/span","点击我的积分商城");
-
         Thread.sleep(3000);
         System.out.println("等待3秒");
-
         clickBtn("//*[@id=\"personal_layout\"]/div[3]/div[3]/a[1]","点击全部订单");
-
+        Thread.sleep(3000);
         clickBtn("//*[@id=\"myintegral-box-top\"]/div[2]","点击待付款");
-
         clickBtn("//*[@id=\"myintegral-box-top\"]/div[3]","点击待发货");
-
         clickBtn("//*[@id=\"myintegral-box-top\"]/div[4]","点击待收货");
-
         clickBtn("//*[@id=\"myintegral-box-top\"]/div[5]","点击退款/售后");
-
-        System.out.println("====================test_order结束====================");
+        System.out.println("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑test_order结束↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
+        System.out.println("=====================================================");
         driver.close();
     }
 
@@ -387,130 +344,72 @@ public class Mall2testApplicationTest {
     @Test
     @Tag("测试分类功能")
     public void test_sort() throws InterruptedException{
-        System.out.println("====================test_sort开始====================");
+        System.out.println("↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓test_sort开始↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓");
         beforeRun();
         driver.get("http://www.xiehome.com/");
-        System.out.println("打开登陆页面");
-
-        clickBtn("/html/body/div[2]/div[2]/div/img","关闭弹窗");
-
+        Thread.sleep(33000);
+        driver.get("http://www.xiehome.com/");
+        Thread.sleep(3000);
         clickBtn("/html/body/div[5]/a[2]/div","点击分类");
-
         clickBtn("//*[@id=\"tg_container\"]/div/a[1]/div/div","点击全部");
-
         clickBtn("/html/body/div[1]/a[1]","点击返回");
-
         clickBtn("//*[@id=\"classify_layout\"]/div[1]/a[2]/div/span","点击装修公司");
-
         clickBtn("//*[@id=\"tg_container\"]/div/a[2]/div","点击半包");
-
         clickBtn("/html/body/div[1]/a[1]","点击返回");
-
         clickBtn("//*[@id=\"classify_layout\"]/div[1]/a[3]/div/span","点击建材超市");
-
         clickBtn("//*[@id=\"tg_container\"]/div/a/div","点击全部");
-
         clickBtn("/html/body/div[1]/a[1]","点击返回");
-
         clickBtn("//*[@id=\"classify_layout\"]/div[1]/a[4]/div/span","全屋定制");
-
         clickBtn("//*[@id=\"tg_container\"]/div/a/div","点击全部");
-
         clickBtn("/html/body/div[1]/a[1]","点击返回");
-
         clickBtn("//*[@id=\"classify_layout\"]/div[1]/a[5]/div/span","瓷砖");
-
         clickBtn("//*[@id=\"tg_container\"]/div/a[2]/div","地面砖");
-
         clickBtn("/html/body/div[1]/a[1]","点击返回");
-
         clickBtn("//*[@id=\"classify_layout\"]/div[1]/a[6]/div/span","点击卫浴洁具");
-
         clickBtn("//*[@id=\"tg_container\"]/div/a[3]/div/div/img","点击水龙头");
-
         clickBtn("/html/body/div[1]/a[1]","点击返回");
-
         clickBtn("//*[@id=\"classify_layout\"]/div[1]/a[7]/div/span","点击门窗");
-
         clickBtn("//*[@id=\"tg_container\"]/div/a[4]/div","点击玻璃门");
-
         clickBtn("/html/body/div[1]/a[1]","点击返回");
-
         clickBtn("//*[@id=\"classify_layout\"]/div[1]/a[8]/div/span","点击吊顶");
-
         clickBtn("//*[@id=\"tg_container\"]/div/a[4]/div","点击厨卫吊顶");
-
         clickBtn("/html/body/div[1]/a[1]","点击返回");
-
         clickBtn("//*[@id=\"classify_layout\"]/div[1]/a[9]/div/span","点击地板");
-
         clickBtn("//*[@id=\"tg_container\"]/div/a[5]/div","点击实木地板");
-
         clickBtn("/html/body/div[1]/a[1]","点击返回");
-
         slidedown("//*[@id=\"classify_layout\"]/div[1]/a[8]/div");
-
         clickBtn("//*[@id=\"classify_layout\"]/div[1]/a[10]/div/span","家私");
-
         clickBtn("//*[@id=\"tg_container\"]/div/a[5]/div","沙发");
-
         backhome();
-
         slidedown("//*[@id=\"classify_layout\"]/div[1]/a[8]/div");
-
         clickBtn("//*[@id=\"classify_layout\"]/div[1]/a[11]/div/span","窗帘墙纸");
-
         clickBtn("//*[@id=\"tg_container\"]/div/a[1]/div","全部");
-
         backhome();
-
         slidedown("//*[@id=\"classify_layout\"]/div[1]/a[8]/div");
-
         clickBtn("//*[@id=\"classify_layout\"]/div[1]/a[12]/div/span","家电");
-
         clickBtn("//*[@id=\"tg_container\"]/div/a[3]/div","智能家电");
-
         clickBtn("/html/body/div[1]/a[1]","点击返回");
-
         slidedown("//*[@id=\"classify_layout\"]/div[1]/a[8]/div");
-
         clickBtn("//*[@id=\"classify_layout\"]/div[1]/a[13]/div/span","环保");
-
         clickBtn("//*[@id=\"tg_container\"]/div/a/div","全部");
-
         backhome();
-
         slidedown("//*[@id=\"classify_layout\"]/div[1]/a[8]/div");
-
         clickBtn("//*[@id=\"classify_layout\"]/div[1]/a[14]/div/span","床上用品");
-
         clickBtn("//*[@id=\"tg_container\"]/div/a[3]/div","乳胶床垫");
-
         backhome();
-
         slidedown("//*[@id=\"classify_layout\"]/div[1]/a[8]/div");
-
         clickBtn("//*[@id=\"classify_layout\"]/div[1]/a[15]/div/span","灯饰照明");
-
         clickBtn("//*[@id=\"tg_container\"]/div/a[5]/div","LED灯");
-
         backhome();
-
         slidedown("//*[@id=\"classify_layout\"]/div[1]/a[8]/div");
-
         clickBtn("//*[@id=\"classify_layout\"]/div[1]/a[16]/div/span","油漆涂料");
-
         clickBtn("//*[@id=\"tg_container\"]/div/a[4]/div","艺术涂料");
-
         backhome();
-
         slidedown("//*[@id=\"classify_layout\"]/div[1]/a[8]/div");
-
         clickBtn("//*[@id=\"classify_layout\"]/div[1]/a[17]/div/span","其他");
-
         clickBtn("//*[@id=\"tg_container\"]/div/a/div","全部");
-
-        System.out.println("====================test_sort结束====================");
+        System.out.println("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑test_sort结束↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
+        System.out.println("====================================================");
         driver.close();
     }
 
@@ -521,98 +420,53 @@ public class Mall2testApplicationTest {
     @Test
     @Tag("测试用户中心")
     public void test_admin() throws InterruptedException {
-        System.out.println("====================test_admin开始====================");
+        System.out.println("↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓test_admin开始↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓");
         beforeRun();
         driver.get("http://www.xiehome.com/");
-        System.out.println("打开登陆页面");
-        clickBtn("/html/body/div[2]/div[2]/div/img","关闭弹窗");
-
+        Thread.sleep(3000);
+        driver.get("http://www.xiehome.com/");
+        Thread.sleep(3000);
         clickBtn("/html/body/div[5]/a[5]","点击我的");
-
         checkUrl("//*[@id=\"form\"]/div[2]/div[3]/a/p");
-
+        Thread.sleep(1000);
         driver.findElement(By.id("phoneNum_login")).sendKeys("15818376789");
         System.out.println("输入正确账号");
-
+        Thread.sleep(1000);
         driver.findElement(By.id("login_password_num")).sendKeys("asd123456");
         System.out.println("输入正确密码");
-
+        Thread.sleep(1000);
         driver.findElement(By.id("login_btn")).click();
         System.out.println("点击登陆");
-
         Thread.sleep(5000);
-
         clickBtn("//*[@id=\"personal_layout\"]/div[1]/a/div/img","点击右上角设置");
-
-        clickBtn("//*[@id=\"set-site\"]/a[1]","点击收货管理");
-
-        clickBtn("//*[@id=\"showTooltips\"]","新添地址");
-
-        driver.findElement(By.id("address_edit_name")).sendKeys("骆骆骆");
-        Thread.sleep(2000);
-        driver.findElement(By.className("address_edit_num")).sendKeys("15818376789");
-        Thread.sleep(2000);
-        driver.findElement(By.id("city-picker")).clear();
-        Thread.sleep(2000);
-        driver.findElement(By.id("city-picker")).sendKeys("广东省 东莞市 莞城区");
-        Thread.sleep(2000);
-        driver.findElement(By.className("address_edit_others")).sendKeys("东纵路愉景大厦三楼");
-        Thread.sleep(2000);
-        clickBtn("//*[@id=\"showTooltips\"]","点击保存");
-
-
-        backhome();
-        backhome();
-        backhome();
-
-        clickBtn("//*[@id=\"personal_layout\"]/div[1]/a/div/img","点击右上角设置");
-
         clickBtn("//*[@id=\"set-reset\"]/a[1]","点击密码重置");
-
+        Thread.sleep(2000);
         clickBtn("//*[@id=\"set-resetOldPW\"]/a[1]","验证旧密码");
-
         driver.findElement(By.id("former")).sendKeys("asd123456");
-
         driver.findElement(By.id("fresh")).sendKeys("asd654321");
-
         driver.findElement(By.id("affirm")).sendKeys("asd654321");
-
-
         driver.findElement(By.id("reset-box-bottom")).click();
         Thread.sleep(3000);
-
         clickBtn("//*[@id=\"personal_layout\"]/div[1]/a/div/img","点击右上角设置");
-
         clickBtn("//*[@id=\"set-reset\"]/a[1]","点击密码重置");
-
+        Thread.sleep(2000);
         clickBtn("//*[@id=\"set-resetOldPW\"]/a[1]","验证旧密码");
-
         driver.findElement(By.id("former")).sendKeys("asd654321");
-
         driver.findElement(By.id("fresh")).sendKeys("asd123456");
-
         driver.findElement(By.id("affirm")).sendKeys("asd123456");
-
         driver.findElement(By.id("reset-box-bottom")).click();
         Thread.sleep(3000);
-
         clickBtn("//*[@id=\"personal_layout\"]/div[1]/a/div/img","点击右上角设置");
-
         clickBtn("//*[@id=\"set-resetPhone\"]/a[1]/div/span","更换手机号");
-
+        Thread.sleep(3000);
         clickBtn("//*[@id=\"set-resetPW\"]/a[1]","验证密码");
-
         driver.findElement(By.xpath("/html/body/div[5]/div[2]/div/div[1]/div/input")).sendKeys("asd123456");
         Thread.sleep(3000);
-
         clickBtn("/html/body/div[5]/div[2]/div/div[2]","点击下一步");
-
-        backhome();
-        backhome();
-
+        Thread.sleep(3000);
         driver.close();
-
-        System.out.println("====================test_admin结束====================");
+        System.out.println("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑test_admin结束↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
+        System.out.println("=====================================================");
     }
 
     /**
@@ -622,88 +476,56 @@ public class Mall2testApplicationTest {
     @Test
     @Tag("测试购物功能")
     public void test_shopping() throws InterruptedException {
-        System.out.println("====================test_shopping开始====================");
+        System.out.println("↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓test_shopping开始↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓");
         beforeRun();
         driver.get("http://www.xiehome.com/");
-
-        System.out.println("打开登陆页面");
-
-        clickBtn("/html/body/div[2]/div[2]/div/img","关闭弹窗");
-
-        clickBtn("/html/body/div[5]/a[3]","点击商家");
-
-        clickBtn("//*[@id=\"tg_container\"]/div[1]/a[1]","点击苏宁异构");
-
-        clickBtn("//*[@id=\"seller-home-warp-fitment-box\"]/div[1]/a[1]/div/div/div[2]/div[4]","点击立即购买");
+        Thread.sleep(3000);
+        driver.get("http://www.xiehome.com/");
+        Thread.sleep(3000);
+        clickBtn("/html/body/div[1]/div[2]/a/span[1]","点击搜索框");
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("/html/body/div[2]/div[1]/div[2]/input")).sendKeys("苏宁易购");
+        Thread.sleep(5000);
+        clickBtn("/html/body/div[2]/div[2]/div[1]/li/span","点击搜索结果");
+        Thread.sleep(2000);
+        clickBtn("//*[@id=\"tg_container\"]/div/a[1]","点击空调");
+        Thread.sleep(2000);
 
         clickBtn("/html/body/div[5]/div/div[2]/span","点击立即购买");
-
+        System.out.println("点击立即购买");
+        Thread.sleep(2000);
         clickBtn("/html/body/div[6]/div[2]/div[4]/div[2]","点击立即购买");
-
-        Thread.sleep(5000);
-
+        System.out.println("点击立即购买");
+        Thread.sleep(3000);
         driver.findElement(By.id("phoneNum_login")).sendKeys("15818376789");
         System.out.println("输入正确账号");
-
         driver.findElement(By.id("login_password_num")).sendKeys("asd123456");
         System.out.println("输入正确密码");
-
+        Thread.sleep(2000);
         driver.findElement(By.id("login_btn")).click();
         System.out.println("点击登陆");
-
-        Thread.sleep(5000);
-
+        Thread.sleep(3000);
+        checkUrl("//*[@id=\"product_detail_layout\"]/div[8]/div[2]/div[1]/a[3]/div");
+        Thread.sleep(2000);
         clickBtn("/html/body/div[5]/div/div[2]/span","点击立即购买");
-
+        checkUrl("//*[@id=\"755\"]");
+        Thread.sleep(2000);
         clickBtn("/html/body/div[6]/div[2]/div[4]/div[2]","点击立即购买");
-
-//        clickBtn("//*[@id=\"tg_container\"]/div/div[1]/input","选中商品");
-
-//        clickBtn("//*[@id=\"cart_layout\"]/div[3]/div[2]","点击结算");
-
+        Thread.sleep(3000);
         driver.findElement(By.xpath("/html/body/div[5]/div/form/div[1]/div[4]/div[2]/textarea")).sendKeys("随便留点盐");
-
         clickBtn("/html/body/div[5]/div/form/div[1]/div[5]/button/div","点击结算");
-
         clickBtn("//*[@id=\"pay_select_layout\"]/div[2]/label[1]","选中微信支付");
-
+        Thread.sleep(2000);
         clickBtn("//*[@id=\"pay_select_layout\"]/div[3]","点击确认支付");
-
         checkUrl("/html/body/div/div[2]/h4");
-
-        driver.close();
-
-        beforeRun();
-
-        driver.get("http://www.xiehome.com/");
-
-        System.out.println("打开登陆页面");
-
-        clickBtn("/html/body/div[2]/div[2]/div/img","关闭弹窗");
-
-        clickBtn("/html/body/div[5]/a[5]","点击我的");
-
-        driver.findElement(By.id("phoneNum_login")).sendKeys("15818376789");
-        System.out.println("输入正确账号");
-
-        driver.findElement(By.id("login_password_num")).sendKeys("asd123456");
-        System.out.println("输入正确密码");
-
-        driver.findElement(By.id("login_btn")).click();
-        System.out.println("点击登陆");
-
-        Thread.sleep(5000);
-
-        clickBtn("//*[@id=\"personal_layout\"]/div[3]/div[2]/a[2]","待付订单");
-
+        driver.get("http://www.xiehome.com/index.php/m.php/myorderlist?type=WAIT_BUYER_PAY");
+        System.out.println("准备去取消订单");
         clickBtn("//*[@id=\"tg_container\"]/div/div[1]/div[2]/div","取消订单");
-
+        Thread.sleep(2000);
         clickBtn("/html/body/div[6]/div/div[2]/div[2]","取消");
-
+        Thread.sleep(2000);
         driver.close();
-
-        System.out.println("====================test_shopping结束====================");
+        System.out.println("↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑test_shopping结束↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑");
+        System.out.println("========================================================");
     }
-
-
 }
