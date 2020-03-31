@@ -1,5 +1,5 @@
 # 商城自动化项目
-Mall2Test
+商城构建Maven自动化项目
 
 Java+selenium+junit+jenkins+TAPD
 
